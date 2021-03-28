@@ -10,7 +10,7 @@ class DebugGUI():
 
         self.next_row = -1
 
-        self.debug_state_data_filename = "src/debug_tab_close_config.json"
+        self.debug_state_data_filename = "debug/debug_tab_close_config.json"
 
         self.tree = None
 

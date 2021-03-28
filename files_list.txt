@@ -1,7 +1,7 @@
 src/run_commands.txt
 src/index.js
 src/package.json
-src/debug_tab_close_config.json.js
+src/debug_tab_close_config.json
 
 src/web/index.html
 src/web/main.js
