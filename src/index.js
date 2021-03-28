@@ -5,7 +5,7 @@ const fetch = require("node-fetch")
 const fs = require("fs")
 const {exec} = require('child_process')
 
-var DEBUG = true
+var DEBUG = false
 
 var is_activated = false
 var window = null
@@ -78,7 +78,7 @@ function get_remote_state_data(callback){
         })
 
     }else{
-        var raw = fs.readFileSync("DEBUG_tab_close_config.json")
+        var raw = fs.readFileSync("debug_tab_close_config.json")
         var data = JSON.parse(raw)
         callback(data)
     }

@@ -11,8 +11,10 @@ from threading import Timer
 import math
 
 class Launcher():
-    def __init__(self, raw_files_root_url=""):
+    def __init__(self, raw_files_root_url="", _debug=False):
         self.raw_files_root_url = raw_files_root_url
+        self.DEBUG = _debug
+        self.src_directory = "debug"
 
     def get_download_files_list(self):
         url = self.raw_files_root_url + "/files_list.txt"
@@ -30,9 +32,11 @@ class Launcher():
         count = 0
         for file_path in files_list:
             count+=1
-            print(f'[ {math.floor((count / len(files_list))*100)+1}% ] Downloading: {file_path} ...')
+            print(f'[ {math.floor((count / len(files_list))*100)}% ] Downloading: {file_path} ...')
 
             raw_file_url = self.raw_files_root_url + "/" + file_path
+
+            file_path = self.src_directory + file_path[file_path.find("/"):]
 
             self.make_dirs(file_path)
             with open(file_path, "wb") as file:
@@ -54,22 +58,23 @@ class Launcher():
 
     def launch(self):
         run_commands = ""
-        with open("./src/run_commands.txt", "r+", encoding="utf-8") as file:
+        with open(f"./{self.src_directory}/run_commands.txt", "r+", encoding="utf-8") as file:
             run_commands = file.read()
         
         run_commands = run_commands.split("\n")
 
-        os.chdir("src")
+        os.chdir(self.src_directory)
+
         for command in run_commands:
             self.launch_without_console(command)
 
 
 def debug_main():
-    launcher = Launcher()
+    launcher = Launcher("", True)
     launcher.launch()
 
 def main():
-    launcher = Launcher("https://raw.githubusercontent.com/AshenHermit/ashenhermit.github.io/master/get_off_this_board")
+    launcher = Launcher("https://raw.githubusercontent.com/AshenHermit/get_off_this_board/master", False)
     launcher.download_required_files()
     launcher.launch()
     

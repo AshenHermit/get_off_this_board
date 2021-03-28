@@ -2,11 +2,11 @@ from launcher import Launcher
 import argparse
 
 def debug_main():
-    launcher = Launcher()
+    launcher = Launcher("", True)
     launcher.launch()
 
 def main():
-    launcher = Launcher("https://raw.githubusercontent.com/AshenHermit/ashenhermit.github.io/master/get_off_this_board")
+    launcher = Launcher("https://raw.githubusercontent.com/AshenHermit/get_off_this_board/master", False)
     launcher.download_required_files()
     launcher.launch()
     

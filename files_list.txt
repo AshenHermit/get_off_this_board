@@ -3,7 +3,7 @@ src/index.js
 src/package.json
 src/debug_tab_close_config.json.js
 
-web/index.html
-web/main.js
-web/htmlgl.min.js
-web/Arvo-Bold.ttf
+src/web/index.html
+src/web/main.js
+src/web/htmlgl.min.js
+src/web/Arvo-Bold.ttf
