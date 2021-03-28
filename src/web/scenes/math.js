@@ -202,6 +202,7 @@ scenes["math"] = {
         }
 
         StartVideoBgScene(
+            special_options,
             special_options["track_url"],
             [
                 "https://sun9-73.userapi.com/impg/NhVnJ1tkJt2YMeGj61N2YeWpbgh5VbZGEJp3VQ/DEyuW0olFIs.jpg?size=1024x825&quality=96&sign=8b533f9e0a96889ec1bc19bed8f438de&type=album",

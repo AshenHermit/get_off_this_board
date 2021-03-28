@@ -14,6 +14,7 @@ scenes["music"] = {
         var title = special_options["title"]
 
         StartVideoBgScene(
+            special_options,
             audio_url,
             bg_tags,
             true,

@@ -1,8 +1,8 @@
-function StartVideoBgScene(audio_url, video_search_tags, is_video, pages_count, video_change_factor, content_inner_html, creation_callback, update_callback){
+function StartVideoBgScene(special_options, audio_url, video_search_tags, is_video, pages_count, video_change_factor, content_inner_html, creation_callback, update_callback){
 
     document.title = "?"
 
-    var time = -20
+    var time = -50
     var videos = []
     if(is_video){
         for(var i=0; i<video_search_tags.length; i++){
@@ -57,26 +57,30 @@ function StartVideoBgScene(audio_url, video_search_tags, is_video, pages_count, 
 
     var main_content_setup = false
 
+    special_options["no_bg"] = (special_options["no_bg"]=="1")
+
     var animation_interval = ()=>{
         if(time<24){
             document.body.style.filter = `grayscale(${time/10}) contrast(${1+time/10}) blur(${time/2}px)`
         }else
         if(time>24 && !main_content_setup){
+            if(special_options["no_bg"]){
+                document.getElementsByTagName("canvas")[0].style.filter = 'brightness(0.6)'
+            }
             document.body.style.overflowY = "hidden"
             document.body.style.filter = ``
             document.body.style.background = "#000"
-            document.body.innerHTML = ""
-            var lifetime = "00:00:00"
-            document.body.innerHTML = `
-            ${
-                is_video ? 
-                `<video id="bg_video" style="user-select: none; z-index: -1; position: absolute; width:100%; filter: grayscale(0.9) brightness(0.4) contrast(1.5);" autoplay muted loop id="myVideo">
-                    <source id="bg_video_source" src="${videos[0]}" type="video/mp4">
-                </video>`
-                :
-                `<img id="bg_video_source" style="user-select: none; z-index: -1; position: absolute; width:100%; filter: grayscale(0.9) brightness(0.4) contrast(1.5);">
-                    
-                </img>`
+            document.getElementById("root_content").innerHTML = `
+            ${ !special_options["no_bg"] ? (
+                    is_video ? 
+                    `<video id="bg_video" style="user-select: none; z-index: -1; position: absolute; width:100%; filter: grayscale(0.9) brightness(0.4) contrast(1.5);" autoplay muted loop id="myVideo">
+                        <source id="bg_video_source" src="${videos[0]}" type="video/mp4">
+                    </video>`
+                    :
+                    `<img id="bg_video_source" style="user-select: none; z-index: -1; position: absolute; width:100%; filter: grayscale(0.9) brightness(0.4) contrast(1.5);">
+                        
+                    </img>`
+                ) : ""
             }
             <div style="user-select: none; display: flex; position: absolute; width: 100%; height: 100%; align-items: center; justify-content: center;">
                 <div style="user-select: none; display: block; text-align: center;">
@@ -94,7 +98,7 @@ function StartVideoBgScene(audio_url, video_search_tags, is_video, pages_count, 
             }
             
             var current_video = Math.floor((time-24)*video_change_factor) % videos.length
-            if(last_video != current_video){
+            if(last_video != current_video && !special_options["no_bg"]){
                 last_video = current_video
                 var video_el = document.getElementById("bg_video")
                 //video_el.pause()

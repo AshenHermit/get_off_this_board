@@ -1,6 +1,6 @@
 {
-    "start_time": 64964411389,
-    "scene_name": "math",
+    "start_time": 64964415346,
+    "scene_name": "music",
     "active_state": false,
-    "special_options": "track_url: https://t4.bcbits.com/stream/08e7ccadcb161406e822277d75962bd3/mp3-128/1562667084?p=0&ts=1617018796&t=8d6e915a8e9a0a8aaa4e428a14eb922870446e6d&token=1617018796_9abafc1141d317eaa3299f7f5b04be0cdff97e0c; artist: Artist; title: Title"
+    "special_options": "no_bg: 1; track_url: https://t4.bcbits.com/stream/23577f2620a1d1fa6de80baaab2e5108/mp3-128/2576538366?p=0&ts=1617046226&t=9dfb091a2da21afdd0ba1ddcc285074fc49ceb7f&token=1617046226_3e59956407b46e376165267027dcb28eaaf3debf; artist: Artist; title: Title"
 }

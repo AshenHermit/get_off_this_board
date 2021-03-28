@@ -37,6 +37,11 @@
             left: 0;
             width: 100%;
             height: 100%;
+            z-index: -1;
+        }
+
+        #root_content{
+            
         }
 
         .glitch-shader{
@@ -46,7 +51,11 @@
 </head>
 <body>
     <div id="3dcontent" class="glitch-shader">
-        <h1>Ashen Hermit</h1>
+        
+    </div>
+
+    <div id="root_content">
+
     </div>
 
     <script id="vertexShader" type="x-shader/x-vertex">
@@ -60,6 +69,7 @@
     </script>
     
     <script id="fragmentShader" type="x-shader/x-fragment">
+        uniform float transitionTime;
         uniform float amount;
         uniform sampler2D tDiffuse;
         varying vec2 vUv;
@@ -76,23 +86,29 @@
         vec4 get_grayscale_color(vec2 uv){
             vec4 color =  texture2D( tDiffuse, uv);
             float c = (color.r + color.g + color.b)/3.0;
-            return vec4(c, c, c, 0.0);
-            return color;
+            return mix(color, vec4(c, c, c, 0.0), clamp(transitionTime/4.0, 0.0, 1.0));
         }
       
         void main() {
             
-            vec4 colorGB = get_grayscale_color( vUv + vec2((random(vec2(floor((vUv.y+amount)*-2.0)*amount, 0.0))-0.5)/10.0, 0.0));
+            vec4 colorGB = get_grayscale_color( vUv + vec2((random(vec2(floor((vUv.y+amount)*-2.0)*amount, 0.0))-0.5)/10.0, 0.0)*(transitionTime/10.0) 
+            
+            //vec4 colorGB = get_grayscale_color( vUv + vec2(pow(mod(clamp(vUv.y, 0.5, 1.0)*50.0+amount*10.0, 10.0), 5.0)/10000.0, 0.0)*(transitionTime/10.0)
+                + vec2(0.0, (random(vec2(0.0, floor((vUv.x-amount)*-3.0)*amount))-0.5)/30.0)*(transitionTime/1.0));
             //vec4 colorGB = get_grayscale_color( vUv );
 
-            vec4 colorR = get_grayscale_color( vUv + vec2((random(vec2(floor(vUv.y*20.0)*amount, 0.0))-0.5)/50.0, 0.0) );
+            vec4 colorR = get_grayscale_color( vUv + vec2((random(vec2(floor(vUv.y*20.0)*amount, 0.0))-0.5)/50.0, 0.0)*(transitionTime/1.0) );
             
             vec4 color = vec4(colorR.r, colorGB.g, colorGB.b, 1.0);
             //vec4 color = colorGB;
 
             vec2 uvRandom = vUv;
             uvRandom.y *= random(vec2(uvRandom.y,amount));
-            color.rgb += random(uvRandom)*0.2;
+            color.rgb += random(uvRandom)*(transitionTime/10.0);
+
+            if(mod(vUv.y*200.0+amount*10.0, 1.0) < 0.5){
+                color.rgb-=0.05 * transitionTime;
+            }
 
             gl_FragColor = vec4( color  );
         }

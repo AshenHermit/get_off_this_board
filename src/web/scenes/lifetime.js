@@ -48,6 +48,7 @@ scenes["lifetime"] = {
         var wait_timeout = null
 
         StartVideoBgScene(
+            special_options,
             special_options["track_url"],
             ["abandoned -dancing", "meat", "rain", "macro -lightbulb"],
             true,

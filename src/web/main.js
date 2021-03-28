@@ -23,10 +23,12 @@ composer.addPass(renderPass);
 var vertShader = document.getElementById('vertexShader').textContent;
 var fragShader = document.getElementById('fragmentShader').textContent;
 var counter = 0.0;
+var transitionTime = 0.0;
 var myEffect = {
     uniforms: {
         "tDiffuse": { value: null },
-        "amount": { value: counter }
+        "amount": { value: counter },
+        "transitionTime": { value: transitionTime }
     },
     vertexShader: vertShader,
     fragmentShader: fragShader
@@ -110,7 +112,9 @@ function animate() {
 
     var timer = Date.now() * 0.0002;
     counter += 0.01;
+    if(transitionTime < 5.0) transitionTime += 0.01;
     customPass.uniforms["amount"].value = counter;
+    customPass.uniforms["transitionTime"].value = transitionTime;
 
     requestAnimationFrame( animate );
     composer.render();
