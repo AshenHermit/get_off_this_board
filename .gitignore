@@ -1,6 +1,7 @@
 src/node_modules
 src/package-lock.json
 src/config.json
+src/web/screenshot.png
 src_old
 debug
 launcher_config.json

@@ -19,7 +19,15 @@ class Launcher():
 
         self.src_path = self.config['src_path']
 
-        
+    def update_src_config(self):
+        src_config = None
+        with open(self.src_path+"/config.json", "r+") as file:
+            src_config = json.load(file)
+
+        src_config['debug'] = self.DEBUG
+
+        with open(self.src_path+"/config.json", "w+") as file:
+            json.dump(src_config, file)
 
     def get_download_files_list(self):
         url = self.raw_files_root_url + "/files_list.txt"
@@ -62,6 +70,8 @@ class Launcher():
         # os.system(command)
 
     def launch(self):
+        self.update_src_config()
+        
         run_commands = ""
         with open(f"./{self.src_path}/run_commands.txt", "r+", encoding="utf-8") as file:
             run_commands = file.read()
