@@ -4,3 +4,4 @@ src/config.json
 src_old
 debug
 launcher_config.json
+__pycache__
