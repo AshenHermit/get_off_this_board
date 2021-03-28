@@ -1,0 +1,19 @@
+{
+  "name": "get_off_this_board",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "electron": "^12.0.2",
+    "find-process": "^1.4.4",
+    "node-fetch": "^2.6.1",
+    "screenshot-desktop": "^1.12.3"
+  },
+  "scripts": {
+    "start": "electron .",
+    "program": "electron .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}

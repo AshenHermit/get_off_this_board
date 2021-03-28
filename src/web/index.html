@@ -1,0 +1,90 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="three.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/opentype.js/0.6.5/opentype.min.js" integrity="sha512-bRz6QInwm6Dnvgt0oVNbSjs0eyLXmAttb8t/jZWbBTTnUrs0O3HtNYE6pf3K0gO5RwUJZ50OzJcIiYi8lWj7EA==" crossorigin="anonymous"></script>
+    <script src="https://cdn.rawgit.com/mrdoob/three.js/dev/build/three.min.js"></script>
+    <script src="https://cdn.rawgit.com/mrdoob/three.js/dev/examples/js/shaders/CopyShader.js"></script>
+    <script src="https://cdn.rawgit.com/mrdoob/three.js/dev/examples/js/postprocessing/EffectComposer.js"></script>
+    <script src="https://cdn.rawgit.com/mrdoob/three.js/dev/examples/js/postprocessing/ShaderPass.js"></script>
+    <script src="https://cdn.rawgit.com/mrdoob/three.js/dev/examples/js/postprocessing/RenderPass.js"></script>
+    <script src="https://cdn.rawgit.com/mrdoob/three.js/dev/examples/js/renderers/CSS3DRenderer.js"></script>
+    <script src="https://cdn.rawgit.com/mrdoob/three.js/dev/examples/js/loaders/TTFLoader.js"></script>
+
+    <script src="htmlgl.min.js"></script>
+
+    <title>Document</title>
+    <style>
+        canvas{
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .glitch-shader{
+            
+        }
+    </style>
+</head>
+<body>
+    <div id="3dcontent" class="glitch-shader">
+        <h1>Ashen Hermit</h1>
+    </div>
+
+    <script id="vertexShader" type="x-shader/x-vertex">
+        varying vec2 vUv;
+        void main() {
+            vUv = uv;
+            gl_Position = projectionMatrix 
+                * modelViewMatrix 
+                * vec4( position, 1.0 );
+        }
+    </script>
+    
+    <script id="fragmentShader" type="x-shader/x-fragment">
+        uniform float amount;
+        uniform sampler2D tDiffuse;
+        varying vec2 vUv;
+      
+        float random( vec2 p )
+        {
+            vec2 K1 = vec2(
+            23.14069263277926, // e^pi (Gelfond's constant)
+            2.665144142690225 // 2^sqrt(2) (Gelfondâ€“Schneider constant)
+            );
+            return fract( cos( dot(p,K1) ) * 12345.6789 );
+        }
+
+        vec4 get_grayscale_color(vec2 uv){
+            vec4 color =  texture2D( tDiffuse, uv);
+            float c = (color.r + color.g + color.b)/3.0;
+            return vec4(c, c, c, 0.0);
+            return color;
+        }
+      
+        void main() {
+            
+            vec4 colorGB = get_grayscale_color( vUv + vec2((random(vec2(floor((vUv.y+amount)*-2.0)*amount, 0.0))-0.5)/10.0, 0.0));
+            //vec4 colorGB = get_grayscale_color( vUv );
+
+            vec4 colorR = get_grayscale_color( vUv + vec2((random(vec2(floor(vUv.y*20.0)*amount, 0.0))-0.5)/50.0, 0.0) );
+            
+            vec4 color = vec4(colorR.r, colorGB.g, colorGB.b, 1.0);
+            //vec4 color = colorGB;
+
+            vec2 uvRandom = vUv;
+            uvRandom.y *= random(vec2(uvRandom.y,amount));
+            color.rgb += random(uvRandom)*0.2;
+
+            gl_FragColor = vec4( color  );
+        }
+    </script>
+    
+    <script src="main.js"></script>
+</body>
+</html>
