@@ -1,3 +1,4 @@
+src/config.json
 src/run_commands.txt
 src/index.js
 src/package.json
