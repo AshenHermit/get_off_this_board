@@ -66,6 +66,8 @@ function StartVideoBgScene(special_options, audio_url, video_search_tags, is_vid
         if(time>24 && !main_content_setup){
             if(special_options["no_bg"]){
                 document.getElementById("bg_element").style.filter = 'brightness(0.4)'
+            }else{
+                document.getElementById("bg_element").style.display = 'none'
             }
             document.body.style.overflowY = "hidden"
             document.body.style.filter = ``
