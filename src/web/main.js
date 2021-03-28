@@ -8,6 +8,7 @@ camera.position.z = 5
 const renderer = new THREE.WebGLRenderer();
 // const renderer = new THREE.CSS3DRenderer();
 renderer.setSize( window.innerWidth, window.innerHeight );
+renderer.domElement.id = "bg_element"
 document.body.appendChild( renderer.domElement );
 
 
