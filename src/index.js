@@ -31,8 +31,9 @@ function get_current_time(){
 
 function setupWindow(win){
     if(config.debug){
-        // window.webContents.openDevTools()
-        win.setSimpleFullScreen(true)
+        win.webContents.openDevTools()
+        win.setFullScreen(true)
+        // win.setSimpleFullScreen(true)
         win.setMenuBarVisibility(false)
     }else{
         win.setClosable(false)
@@ -81,13 +82,9 @@ function activate(state_data){
     is_activated = true
     screenshot({ filename: 'web/screenshot.png' })
 
-    var data = {
-        scene_name: "default",
-        special_options: ""
-    }
     window.loadFile('web/index.html').then(()=>{
         window.webContents.executeJavaScript(`
-            activate(${JSON.stringify(data)});
+            activate(${JSON.stringify(state_data)});
         `)
         setTimeout(()=>{
             window.show()

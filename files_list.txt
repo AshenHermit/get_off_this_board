@@ -8,3 +8,9 @@ src/web/main.js
 src/web/index.html
 src/web/htmlgl.min.js
 src/web/Arvo-Bold.ttf
+
+src/web/utils.js
+src/web/video_bg_scene_lib.js
+src/web/scenes/lifetime.js
+src/web/scenes/math.js
+src/web/scenes/music.js

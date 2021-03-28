@@ -18,6 +18,17 @@
 
     <title>Document</title>
     <style>
+        @font-face {
+            font-family: arvo;
+            src: url(Arvo-Bold.ttf);
+        }
+
+        body{
+            font-family: arvo;
+            overflow-x: hidden;
+            overflow-y: hidden;
+        }
+
         canvas{
             position: absolute;
             top: 0;
@@ -86,6 +97,14 @@
     </script>
     
     <script src="init.js"></script>
+    <script src="utils.js"></script>
+    
+    <script src="video_bg_scene_lib.js"></script>
+
+    <script src="scenes/math.js"></script>
+    <script src="scenes/lifetime.js"></script>
+    <script src="scenes/music.js"></script>
+
     <script src="main.js"></script>
 </body>
 </html>

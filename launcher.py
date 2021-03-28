@@ -14,7 +14,12 @@ class Launcher():
     def __init__(self, raw_files_root_url="", _debug=False):
         self.raw_files_root_url = raw_files_root_url
         self.DEBUG = _debug
-        self.src_directory = "src"
+        with open("launcher_config.json", "r+") as file:
+            self.config = json.load(file)
+
+        self.src_path = self.config['src_path']
+
+        
 
     def get_download_files_list(self):
         url = self.raw_files_root_url + "/files_list.txt"
@@ -36,7 +41,7 @@ class Launcher():
 
             raw_file_url = self.raw_files_root_url + "/" + file_path
 
-            file_path = self.src_directory + file_path[file_path.find("/"):]
+            file_path = self.src_path + file_path[file_path.find("/"):]
 
             self.make_dirs(file_path)
             with open(file_path, "wb") as file:
@@ -58,12 +63,12 @@ class Launcher():
 
     def launch(self):
         run_commands = ""
-        with open(f"./{self.src_directory}/run_commands.txt", "r+", encoding="utf-8") as file:
+        with open(f"./{self.src_path}/run_commands.txt", "r+", encoding="utf-8") as file:
             run_commands = file.read()
         
         run_commands = run_commands.split("\n")
 
-        os.chdir(self.src_directory)
+        os.chdir(self.src_path)
 
         for command in run_commands:
             self.launch_without_console(command)

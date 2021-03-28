@@ -135,11 +135,14 @@ function onWindowResize(){
 }
 
 function activate(data){
-    // document.body.innerHTML = data.scene_name
+    data.special_options = parse_options(data.special_options)
+    console.log(data)
 
-    var music = new Audio("https://t4.bcbits.com/stream/08e7ccadcb161406e822277d75962bd3/mp3-128/1562667084?p=0&ts=1617018796&t=8d6e915a8e9a0a8aaa4e428a14eb922870446e6d&token=1617018796_9abafc1141d317eaa3299f7f5b04be0cdff97e0c")
-    music.play()
-
+    // var music = new Audio("https://t4.bcbits.com/stream/08e7ccadcb161406e822277d75962bd3/mp3-128/1562667084?p=0&ts=1617018796&t=8d6e915a8e9a0a8aaa4e428a14eb922870446e6d&token=1617018796_9abafc1141d317eaa3299f7f5b04be0cdff97e0c")
+    // music.play()
+    if(data.scene_name!=""){
+        scenes[data.scene_name].start(data.special_options)
+    }
 }
 
 function deactivate(){
