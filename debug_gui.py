@@ -8,9 +8,12 @@ class DebugGUI():
         self.window.title("Debug GUI")
         self.window.geometry('400x250') 
 
+        with open("launcher_config.json", "r+") as file:
+            self.config = json.load(file)
+
         self.next_row = -1
 
-        self.debug_state_data_filename = "src/debug_tab_close_config.json"
+        self.debug_state_data_filename = self.config['src_path']+"/debug_tab_close_config.json"
 
         self.tree = None
 
