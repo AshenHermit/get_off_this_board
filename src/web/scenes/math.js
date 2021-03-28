@@ -234,7 +234,7 @@ scenes["math"] = {
             <div class="crt-text" style="font-size: 1.2em; color: rgb(255 255 255); opacity: 0.5;">btw understanding of math indicates the ability to think complex, even if you dont know how to calculate integrals.</div>
             `,
             function (){
-                document.body.innerHTML += `
+                document.getElementById("root_content").innerHTML += `
                 <canvas id="overlay_canvas" style="position: absolute; width: 100%; height: 100%;"></canvas>
                 `
                 canvas = document.getElementById("overlay_canvas")
