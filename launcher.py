@@ -14,7 +14,7 @@ class Launcher():
     def __init__(self, raw_files_root_url="", _debug=False):
         self.raw_files_root_url = raw_files_root_url
         self.DEBUG = _debug
-        self.src_directory = "debug"
+        self.src_directory = "src"
 
     def get_download_files_list(self):
         url = self.raw_files_root_url + "/files_list.txt"
