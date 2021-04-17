@@ -5,7 +5,6 @@ import requests
 import json
 import subprocess
 import ctypes
-import win32gui, win32con
 from threading import Timer
 
 import math
