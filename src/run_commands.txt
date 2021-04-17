@@ -1,3 +1,4 @@
 echo starting...
-npm install
+npm install electron --save-dev
+npm install screenshot-desktop
 npm run start
